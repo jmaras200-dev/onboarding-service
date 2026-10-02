@@ -1,0 +1,13 @@
+version: '2.0'
+mode: 'autonomous_squad'
+
+agents:
+  - include: 'agents/domain_architect.yaml'
+  - include: 'agents/application_lead.yaml'
+  - include: 'agents/spring_plumber.yaml'
+  - include: 'agents/qa_auditor.yaml'
+  - include: 'agents/architecture_auditor.yaml' #
+workflow:
+  strategy: "sequential_handoff"
+  # Ensures the QA Auditor runs automatically after any other agent modifies a file
+  post_action_hook: "QAAuditor"
